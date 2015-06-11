@@ -10,3 +10,8 @@
     (is (within-eps? (cube-root 27)
                      3
                      0.001))))
+
+(deftest ex-1.11-test
+  (testing "f-iter and f-rec should give same answers"
+    (doseq [n (range 15)]
+      (is (= (f-iter n) (f-rec n))))))
