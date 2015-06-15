@@ -15,3 +15,9 @@
   (testing "f-iter and f-rec should give same answers"
     (doseq [n (range 15)]
       (is (= (f-iter n) (f-rec n))))))
+
+(deftest ex-1.12-test
+  (testing "pascal-seq and pascal should produce same(ish) results"
+    (doseq [n (range 15)]
+      (is (= (into [] (take (inc n) (pascal-seq)))
+             (pascal n))))))

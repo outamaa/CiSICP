@@ -38,3 +38,24 @@
              b
              (dec count))))
   (go 2 1 0 n))
+
+;; Ex 1.12
+; A recursive solution
+(defn pascal [n]
+  (if (<= n 0)
+    [[1]]
+    (let [pascal-dec (pascal (dec n))
+          pascal-last (last pascal-dec)
+          pascal-n (vec (map +
+                             (concat [0] pascal-last)
+                             (concat pascal-last [0])))]
+      (conj pascal-dec pascal-n))))
+
+; As a bonus, here's a lazy seq of the 'rows' of Pascal triangle
+(defn pascal-seq
+  ([] (pascal-seq [1]))
+  ([pascal-n]
+   (let [pascal-n-inc (vec (map +
+                                (concat [0] pascal-n)
+                                (concat pascal-n [0])))]
+     (cons pascal-n (lazy-seq (pascal-seq pascal-n-inc))))))
