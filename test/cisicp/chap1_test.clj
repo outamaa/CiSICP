@@ -21,3 +21,9 @@
     (doseq [n (range 15)]
       (is (= (into [] (take (inc n) (pascal-seq)))
              (pascal n))))))
+
+(deftest ex-1.16-test
+  (testing "fast-expt-iter exponentiates correctly"
+    (is (= (fast-expt-iter 2 0) 1))
+    (is (= (fast-expt-iter 3 1) 3))
+    (is (= (fast-expt-iter 3 3) 27))))

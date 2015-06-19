@@ -59,3 +59,12 @@
                                 (concat [0] pascal-n)
                                 (concat pascal-n [0])))]
      (cons pascal-n (lazy-seq (pascal-seq pascal-n-inc))))))
+
+;; Ex 1.16
+(defn fast-expt-iter [b n]
+  (defn iter-loop [b n a]
+    (cond
+      (zero? n) a
+      (odd? n) (recur b (dec n) (* b a))
+      :else (recur (* b b) (/ n 2) a)))
+  (iter-loop b n 1))
