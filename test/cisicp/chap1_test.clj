@@ -29,8 +29,17 @@
     (is (= (fast-expt-iter 3 3) 27))))
 
 (deftest ex-1.17-test
-  (testing "fast-expt-mult multiplies correctly"
+  (testing "fast-mult multiplies correctly"
     (is (= (fast-mult 2 0) 0))
+    (is (= (fast-mult 0 2) 0))
+    (is (= (fast-mult 3 1) 3))
+    (is (= (fast-mult 3 3) 9))
+    (is (= (fast-mult 5 3) 15))))
+
+(deftest ex-1.18-test
+  (testing "fast-mult-iter multiplies correctly"
+    (is (= (fast-mult 2 0) 0))
+    (is (= (fast-mult 0 2) 0))
     (is (= (fast-mult 3 1) 3))
     (is (= (fast-mult 3 3) 9))
     (is (= (fast-mult 5 3) 15))))
