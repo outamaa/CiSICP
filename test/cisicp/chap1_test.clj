@@ -43,3 +43,12 @@
     (is (= (fast-mult 3 1) 3))
     (is (= (fast-mult 3 3) 9))
     (is (= (fast-mult 5 3) 15))))
+
+(deftest ex-1.19-test
+  (testing "fib produces Fibonacci numbers"
+    (is (= (fib 1) 1))
+    (is (= (fib 2) 1))
+    (is (= (fib 3) 2))
+    (is (= (fib 4) 3))
+    (is (= (fib 5) 5))
+    (is (= (fib 23) 28657))))

@@ -89,3 +89,23 @@
       (odd? a) (recur (dec a) b (+ b acc))
       :else    (recur (halve a) (double* b) acc)))
   (iter-loop a b 0))
+
+;; Ex 1.19
+; (T(p,q))^2 = T(p^2 + q^2, 2pq + q^2)
+(defn fib-iter [a b p q count]
+  (cond
+    (zero? count) b
+    (even? count) (recur a
+                         b
+                         (+ (* p p)
+                            (* q q))
+                         (+ (* 2 p q)
+                            (* q q))
+                         (/ count 2))
+    :else (recur (+ (* b q) (* a q) (* a p))
+                 (+ (* b p) (* a q))
+                 p
+                 q
+                 (dec count))))
+(defn fib [n]
+  (fib-iter 1 0 0 1 n))
