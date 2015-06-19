@@ -68,3 +68,13 @@
       (odd? n) (recur b (dec n) (* b a))
       :else (recur (* b b) (/ n 2) a)))
   (iter-loop b n 1))
+
+;; Ex 1.17
+(defn fast-mult [a b]
+  (defn double* [x] (* 2 x))
+  (defn halve [x] (/ x 2))
+  (cond
+    (or (zero? a) (zero? b)) 0
+    (= a 1) b
+    (odd? a) (+ b (fast-mult (dec a) b))
+    :else    (fast-mult (halve a) (double* b))))
