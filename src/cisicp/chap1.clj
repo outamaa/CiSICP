@@ -109,3 +109,38 @@
                  (dec count))))
 (defn fib [n]
   (fib-iter 1 0 0 1 n))
+
+;; Ex 1.28
+
+(defn gcd [a b]
+  (if (zero? b)
+    a
+    (recur b (rem a b))))
+
+(defn expmod [base exp m]
+  (cond (zero? exp) 1
+        (even? exp) (let [exped (expmod base (/ exp 2) m)
+                          squared-rem (rem (square exped) m)]
+                      (if (and (not= exped 1)
+                               (not= exped (dec m))
+                               (= squared-rem 1))
+                        0
+                        squared-rem))
+        :else       (rem (* base (expmod base (dec exp) m)) m)))
+
+(defn square [y]
+  (* y y))
+
+(defn miller-rabin-test [n]
+  (letfn [(try-it [a]
+            (= (expmod a (dec n) n) 1))]
+    (try-it (inc (rand-int (- n 2))))))
+
+(defn mr-prime? [n times]
+  (cond (zero? times) true
+        (miller-rabin-test n) (recur n (dec times))
+        :else false))
+
+
+
+

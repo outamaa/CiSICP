@@ -52,3 +52,14 @@
     (is (= (fib 4) 3))
     (is (= (fib 5) 5))
     (is (= (fib 23) 28657))))
+
+(deftest ex-1.28-test
+  (testing "When using Miller-Rabin test, Carmichael numbers do not pass as prime"
+    (is (not (mr-prime? 561 10)))
+    (is (not (mr-prime? 1105 10)))
+    (is (not (mr-prime? 1729 10))))
+  (testing "mr-prime? should return true for primes"
+    (is (mr-prime? 2 10))
+    (is (mr-prime? 3 10))
+    (is (mr-prime? 5 10))
+    (is (mr-prime? 3571 10))))
