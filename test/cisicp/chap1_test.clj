@@ -76,3 +76,16 @@
     (is (= (sum identity -10 inc  10) 0))
     (is (= (sum #(* % %) -10 #(+ % 3) 10)
            (apply + (map #(* % %) (range -10 10 3)))))))
+
+(deftest ex-1.32-test
+  (testing "sum can be defined in terms of accumulate"
+    (is (= (sum            identity 0 inc 10)
+           (accumulate + 0 identity 0 inc 10)))
+    (is (= (sum            #(* % %) 1 #(* % 2) 1000)
+           (accumulate + 0 #(* % %) 1 #(* % 2) 1000))))
+  (testing "product can be defined in terms of accumulate"
+    (is (= (product        identity 1 inc 10)
+           (accumulate * 1 identity 1 inc 10))))
+  (testing "accumulate and acc-rec produce same results"
+    (is (= (accumulate + 0 identity 0 inc 10)
+           (acc-rec    + 0 identity 0 inc 10)))))

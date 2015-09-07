@@ -194,3 +194,25 @@
     1
     (* (term a)
        (product-rec term (next a) next b))))
+
+;; Ex 1.32 a
+(defn accumulate [combiner null-value term a next b]
+  (loop [curr   a
+         result null-value]
+    (if (> curr b)
+      result
+      (recur (next curr)
+             (combiner result
+                       (term curr))))))
+
+;; Ex 1.32 b
+(defn acc-rec [combiner null-value term a next b]
+  (if (> a b)
+    null-value
+    (combiner (accumulate combiner
+                          null-value
+                          term
+                          (next a)
+                          next
+                          b)
+              (term a))))
