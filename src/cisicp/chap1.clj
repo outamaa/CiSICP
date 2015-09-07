@@ -164,3 +164,33 @@
               result
               (recur (next a) (+ result (term a)))))]
     (iter a 0)))
+
+;; Ex 1.31 a
+; Let's do product with loop for a more idiomatic Clojure solution.
+(defn product [term a next b]
+  (loop [curr a
+         result 1]
+    (if (> curr b)
+      result
+      (recur (next curr) (* result (term curr))))))
+
+; With 1-based indexing
+(defn fac-product [n]
+  (product identity 1 inc n))
+
+(defn pi-by-4 [n]
+  (letfn [(term [i]
+            (/ (if (even? i)
+                 (+ i 2)
+                 (+ i 3))
+               (if (even? i)
+                 (+ i 3)
+                 (+ i 2))))]
+    (float (product term 0 inc n))))
+
+;; Ex 1.31 b
+(defn product-rec [term a next b]
+  (if (> a b)
+    1
+    (* (term a)
+       (product-rec term (next a) next b))))
