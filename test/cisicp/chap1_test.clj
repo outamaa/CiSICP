@@ -69,3 +69,10 @@
     (is (= (simpson identity 0 1 100) 1/2))
     (is (= (simpson identity -1 1 100) 0))
     (is (= (simpson #(* % % %) 0 1 100) 1/4))))
+
+(deftest ex-1.30-test
+  (testing "sum"
+    (is (= (sum identity 0 inc 10) 55))
+    (is (= (sum identity -10 inc  10) 0))
+    (is (= (sum #(* % %) -10 #(+ % 3) 10)
+           (apply + (map #(* % %) (range -10 10 3)))))))

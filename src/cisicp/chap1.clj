@@ -156,3 +156,11 @@
                              (juxt multiplier
                                    y))
                        (range 0 (inc n))))))))
+
+;; Ex 1.30
+(defn sum [term a next b]
+  (letfn [(iter [a result]
+            (if (> a b)
+              result
+              (recur (next a) (+ result (term a)))))]
+    (iter a 0)))
