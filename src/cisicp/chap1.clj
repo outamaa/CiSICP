@@ -256,3 +256,13 @@
 
 ;; Ex 1.37 b
 ; Just be a smartass and define it in terms of acc-rec
+
+;; Ex 1.38
+(defn e-approx [n]
+  (letfn [(d [i]
+            (if (= (rem (dec i) 3) 1)
+              (* 2 (inc (quot (dec i) 3)))
+              1))]
+    (cont-frac (constantly 1.0)
+               d
+               n)))
