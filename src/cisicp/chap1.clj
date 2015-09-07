@@ -266,3 +266,11 @@
     (cont-frac (constantly 1.0)
                d
                n)))
+
+;; Ex 1.39
+(defn tan-cf [x k]
+  (letfn [(n [i]
+            (if (= i 1) x (- (* x x))))
+          (d [i]
+            (dec (* 2 i)))]
+    (cont-frac n d k)))
