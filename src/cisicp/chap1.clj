@@ -244,3 +244,15 @@
                        1
                        inc
                        (dec n)))
+
+;; Ex 1.37 a
+(defn cont-frac [n d k]
+  (accumulate (fn [result i] (/ (n i) (+ (d i) result)))
+              (/ (n k) (d k))
+              #(- k %)
+              1
+              inc
+              (dec k)))
+
+;; Ex 1.37 b
+; Just be a smartass and define it in terms of acc-rec
