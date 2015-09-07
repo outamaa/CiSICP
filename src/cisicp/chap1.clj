@@ -216,3 +216,31 @@
                           next
                           b)
               (term a))))
+
+;; Ex 1.33
+(defn filtered-accumulate [predicate combiner null-value term a next b]
+  (loop [curr   a
+         result null-value]
+    (cond (> curr b) result
+          (predicate curr) (recur (next curr)
+                                  (combiner result
+                                            (term curr)))
+          :else            (recur (next curr) result))))
+
+(defn sum-squares-of-primes [a b]
+  (filtered-accumulate #(mr-prime? % 10)
+                       +
+                       0
+                       #(* % %)
+                       a
+                       inc ; No even-odd trickery now
+                       b))
+
+(defn product-relatively-primes [n]
+  (filtered-accumulate #(= (gcd % n) 1)
+                       *
+                       1
+                       identity
+                       1
+                       inc
+                       (dec n)))
