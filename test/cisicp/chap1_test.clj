@@ -63,3 +63,9 @@
     (is (mr-prime? 3 10))
     (is (mr-prime? 5 10))
     (is (mr-prime? 3571 10))))
+
+(deftest ex-1.29-test
+  (testing "Simpson's Rule integrates correctly"
+    (is (= (simpson identity 0 1 100) 1/2))
+    (is (= (simpson identity -1 1 100) 0))
+    (is (= (simpson #(* % % %) 0 1 100) 1/4))))

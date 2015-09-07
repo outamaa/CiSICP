@@ -141,6 +141,18 @@
         (miller-rabin-test n) (recur n (dec times))
         :else false))
 
-
-
-
+;; Ex 1.29
+(defn simpson [f a b n]
+  (let [h (/ (- b a) n)]
+    (letfn [(multiplier [i]
+              (cond (zero? i) 1
+                    (= i n)   1
+                    (even? i) 2
+                    :else     4))
+            (y [i]
+              (f (+ a (* i h))))]
+      (* (/ h 3)
+         (apply + (map (comp (partial apply *)
+                             (juxt multiplier
+                                   y))
+                       (range 0 (inc n))))))))
