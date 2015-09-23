@@ -286,3 +286,7 @@
 ;; Ex 1.41
 (defn double [f]
   #(f (f %)))
+
+;; Ex 1.42
+(defn compose [f g]
+  #(f (g %)))
