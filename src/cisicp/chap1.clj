@@ -307,3 +307,32 @@
 
 (defn n-fold-smooth [f dx n]
   (repeated (smooth f dx) n))
+
+;; Ex 1.45
+(defn fixed-point [f first-guess]
+  (let [tolerance 0.00001
+        close-enough? (fn [v1 v2] (< (Math/abs (- v1 v2)) tolerance))
+        try-it (fn [guess]
+                 (let [next (f guess)]
+                   (if (close-enough? guess next)
+                     next
+                     (recur next))))]
+    (try-it first-guess)))
+
+(defn average-damp [f]
+  #(/ (+ (f %) %)
+      2))
+
+(defn log2 [n-start]
+  (loop [n      n-start
+         result 0]
+    (let [n-new (quot n 2)]
+      (if (= n-new 0)
+        result
+        (recur n-new (inc result))))))
+
+(defn n-root [n x]
+  (fixed-point ((repeated average-damp
+                          (log2 n)) #(/ x
+                                          (Math/pow % (dec n))))
+               1.0))
