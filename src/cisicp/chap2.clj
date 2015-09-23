@@ -27,3 +27,9 @@
   (mul-interval x
                 (make-interval (/ 1.0 (upper-bound y))
                                (/ 1.0 (lower-bound y)))))
+
+;; Ex 2.8
+(defn sub-interval [x y]
+  (add-interval x
+                (make-interval (- (upper-bound y))
+                               (- (lower-bound y)))))
