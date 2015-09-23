@@ -296,3 +296,14 @@
   (if (<= n 1)
     f
     (compose f (repeated f (dec n)))))
+
+;; Ex 1.44
+(defn smooth [f dx]
+  (fn [x]
+    (/ (+ (f x)
+          (f (+ x dx))
+          (f (- x dx)))
+       3)))
+
+(defn n-fold-smooth [f dx n]
+  (repeated (smooth f dx) n))
