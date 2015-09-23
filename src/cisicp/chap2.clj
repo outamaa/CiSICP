@@ -36,6 +36,19 @@
                 (make-interval (- (upper-bound y))
                                (- (lower-bound y)))))
 
-;; Ex 2.9
-(defn width-interval [x]
-  (/ (- (upper-bound x) (lower-bound x)) 2))
+
+;; --
+
+(defn make-center-width [c w]
+  (make-interval (- c w) (+ c w)))
+
+(defn center [i]
+  (/ (+ (lower-bound i) (upper-bound i)) 2))
+
+(defn width [i]
+  (/ (- (upper-bound i) (lower-bound i)) 2))
+
+;; Ex 2.12
+(defn make-center-percent [c p]
+  (let [w (* (Math/abs c) (/ p 100.0))]
+    (make-center-width c w)))
