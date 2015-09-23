@@ -290,3 +290,9 @@
 ;; Ex 1.42
 (defn compose [f g]
   #(f (g %)))
+
+;; Ex 1.43
+(defn repeated [f n]
+  (if (<= n 1)
+    f
+    (compose f (repeated f (dec n)))))
