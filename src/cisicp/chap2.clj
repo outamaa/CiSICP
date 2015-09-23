@@ -24,6 +24,8 @@
                    (max p1 p2 p3 p4))))
 
 (defn div-interval [x y]
+  {:pre [(or (> (lower-bound y) 0)
+             (< (upper-bound y) 0))]}
   (mul-interval x
                 (make-interval (/ 1.0 (upper-bound y))
                                (/ 1.0 (lower-bound y)))))
@@ -33,3 +35,7 @@
   (add-interval x
                 (make-interval (- (upper-bound y))
                                (- (lower-bound y)))))
+
+;; Ex 2.9
+(defn width-interval [x]
+  (/ (- (upper-bound x) (lower-bound x)) 2))
