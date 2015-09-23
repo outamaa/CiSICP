@@ -334,5 +334,28 @@
 (defn n-root [n x]
   (fixed-point ((repeated average-damp
                           (log2 n)) #(/ x
-                                          (Math/pow % (dec n))))
+                                        (Math/pow % (dec n))))
                1.0))
+
+;; Ex 1.46
+(defn iterative-improve [accept? improve]
+  (fn [initial-guess]
+    (loop [x initial-guess]
+      (let [new-x (improve x)]
+        (if (accept? new-x x)
+          new-x
+          (recur new-x))))))
+
+(defn ii-sqrt [x]
+  ((iterative-improve (fn [new-x x]
+                        (< (Math/abs (- (* new-x new-x) new-x)) 0.001))
+                      #(/ (+ % (/ x %))
+                          2))
+   1.0))
+
+(defn ii-fixed-point [f initial-guess]
+  ((iterative-improve (fn [new-x x]
+                        (< (Math/abs (- new-x x))
+                           0.00001))
+                      #(f %))
+   initial-guess))
